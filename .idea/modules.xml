@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HuaweiNewCoder/HuaweiNewCoder.iml" filepath="$PROJECT_DIR$/HuaweiNewCoder/HuaweiNewCoder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCodeTest.iml" filepath="$PROJECT_DIR$/JavaCodeTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LeetcodeTrain/Leetcode.iml" filepath="$PROJECT_DIR$/LeetcodeTrain/Leetcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Leetcode2025Fall/Leetcode2025Fall.iml" filepath="$PROJECT_DIR$/Leetcode2025Fall/Leetcode2025Fall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codefun2000/codefun2000.iml" filepath="$PROJECT_DIR$/codefun2000/codefun2000.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hot100/hot100.iml" filepath="$PROJECT_DIR$/hot100/hot100.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test01/test01.iml" filepath="$PROJECT_DIR$/test01/test01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test06/test06.iml" filepath="$PROJECT_DIR$/test06/test06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test2/test2.iml" filepath="$PROJECT_DIR$/test2/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test3/test3.iml" filepath="$PROJECT_DIR$/test3/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test4/test4.iml" filepath="$PROJECT_DIR$/test4/test4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testKama/testKama.iml" filepath="$PROJECT_DIR$/testKama/testKama.iml" />
+    </modules>
+  </component>
+</project>
