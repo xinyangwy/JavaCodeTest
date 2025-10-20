@@ -14,4 +14,5 @@ public class Main {
         s80 s=new s80();
         System.out.println(s.removeDuplicates(new int[]{1,1,1, 2, 2, 3}));
     }
+    
 }

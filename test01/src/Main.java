@@ -1,99 +1,53 @@
-
-
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        sc.nextLine(); // 读取换行符
-        char [][]grid = new char[n][m];
-        for (int i = 0; i < n; i++) {
-            String line = sc.nextLine();
-            for (int j = 0; j < m; j++) {
-                grid[i][j] = line.charAt(j);
+
+    }
+
+    class Solution {
+        public static int [][]dirs=new int[][]{{0,-1},{0,1},{-1,0},{1,0}};
+        public int orangesRotting(int[][] grid) {
+            int  m=grid.length;
+            int  n=grid[0].length;
+            int cnt=0;
+            Queue<int[]> q=new LinkedList<>();
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if(grid[i][j]==1){
+                        cnt++;
+                    } else if (grid[i][j] == 2) {
+                        q.add(new int[]{i,j});
+                    }
+                }
             }
-        }
-        int cnt=0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if(grid[i][j]!='.'){
-                    if(isDanger(grid,n,m,i,j)){
-                        if(isExisted(grid,n,m,i,j)){
-                            cnt++;
+
+            int minutes=0;
+            while (cnt>0 && !q.isEmpty()){
+                minutes++;
+                //层序遍历 把新鲜的变为腐烂的
+                int s=q.size();
+                for (int k = 0; k < s; k++) {
+                    int []orange=q.poll();
+                    int i=orange[0];
+                    int j=orange[1];
+                    for (int[] dir : dirs) {
+                        int x=i+dir[0];
+                        int y=j+dir[1];
+                        if(x>=0 && x<m && y>=0 &&y<n && grid[x][y]==1){
+                            grid[x][y]=2;
+                            cnt--;
+                            q.add(new int[]{x,y});
                         }
-                        if(!isExisted(grid,n,m,i,j)){
-                            System.out.println(-1);
-                            return;
-                        }
                     }
                 }
             }
+            return cnt>0?-1:minutes;
         }
-        System.out.println(cnt);
-
     }
-
-    private static boolean isDanger(char [][]grid, int n, int m,int i, int j) {
-        char c=grid[i][j];
-        switch (c){
-            case 'L':
-                for(int k=j-1;k>=0;k--){
-                    if(grid[i][k]!='.'){//存在箭头 不危险
-                        return false;
-                    }
-                }
-                break;
-            case 'R':
-                for(int k=j+1;k<m;k++){
-                    if(grid[i][k]!='.'){//存在箭头 不危险
-                        return false;
-                    }
-                }
-                break;
-            case 'U':
-                for(int k=i-1;k>=0;k--){
-                    if(grid[k][j]!='.'){//存在箭头 不危险
-                        return false;
-                    }
-                }
-                break;
-            case 'D':
-                for(int k=i+1;k<n;k++){
-                    if(grid[k][j]!='.'){//存在箭头 不危险
-                        return false;
-                    }
-                }
-                break;
-        }
-        return true;
-    }
-
-    private static boolean isExisted(char [][]grid, int n, int m,int i, int j) {
-        for(int k=j-1;k>=0;k--){
-            if(grid[i][k]!='.'){
-                return true;
-            }
-        }
-        for(int k=j+1;k<m;k++){
-            if(grid[i][k]!='.'){
-                return true;
-            }
-        }
-        for(int k=i-1;k>=0;k--){
-            if(grid[k][j]!='.'){
-                return true;
-            }
-        }
-        for(int k=i+1;k<n;k++){
-            if(grid[k][j]!='.'){
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
 
 
