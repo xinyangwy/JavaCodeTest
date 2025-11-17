@@ -1,61 +1,47 @@
-import java.util.*;
+import java.util.Scanner;
 
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        String strs[] = new String[n];
-        for (int i = 0; i < strs.length; i++) {
-            strs[i] = sc.next();
-        }
-//        TreeMap<String,Integer> map=new TreeMap<>();
-        Map<String,Integer> map=new HashMap<>();
-        for (String str : strs) {
-            map.put(str,fun(str));
-//            System.out.println(fun(str));
-        }
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        char[][] grid = new char[n][m];
+        int[][] dp = new int[n][m];//到达ij 醉倒可以获得的分数
 
-        List<Map.Entry<String,Integer>> list =new ArrayList<>(map.entrySet());
-        Collections.sort(list,((o1, o2) -> {
-            if(o1.getValue().equals(o2.getValue())){
-//                System.out.println("!=" +o1.getKey().length());
-                if(o1.getKey().length()==o2.getKey().length()){
-//                    System.out.println(o1.getKey().length());
-                    char tmp=o1.getKey().charAt(0);
-                    char tmp2=o2.getKey().charAt(0);
-                    return tmp-tmp2;
-//                    return o1.getKey().compareTo(o2.getKey());
-                }
-
-                return o1.getKey().length()-o2.getKey().length();
+        for (int i = 0; i < n; i++) {
+            String str = in.next();
+            for (int j = 0; j < m; j++) {
+                grid[i][j] = str.charAt(j);
             }
-//            System.out.println("wai=" +o1.getKey().length() + " " +o2.getKey().length());
-            return o1.getValue()-o2.getValue();
-        }));
-
-        for (Map.Entry<String, Integer> entry : list) {
-//            System.out.println(entry);
-
-            System.out.println(entry.getKey());
         }
+//初始化dp
+        dp[0][0]=getScore(grid,0,0);
+        for (int j = 1; j < m; j++) {//m列
+            dp[0][j] = dp[0][j - 1] + getScore(grid, 0, j);
+        }
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = dp[i - 1][0] + getScore(grid, i, 0);
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + getScore(grid, i, j);
+            }
+        }
+        System.out.println(dp[n-1][m-1]);
     }
 
-    public static int  fun(String str) {
-        String strs[] = str.split("/");
-        int sum = 0;
-        for (String s : strs) {
-            if (s.length() == 19 && s.indexOf("T") == 10) {
-                int y = Integer.parseInt(s.substring(0, 4));
-                int m = Integer.parseInt(s.substring(5, 7));
-                int d = Integer.parseInt(s.substring(8, 10));
-                int shi = Integer.parseInt(s.substring(11, 13));
-                int fen = Integer.parseInt(s.substring(14, 16));
-                int second = Integer.parseInt(s.substring(17, 19));
-//                System.out.println(y + " " + m + " " + d + " " + shi + " " + fen + " " + second + " ");
-                sum = sum + (y-1800)*365*12*60*60 + m*30*12*60*60 - 0 + d*12*60*60 - 0 + shi*60*60 - 0 + fen*60 - 0 + second - 0;
-            }
+    private static int getScore(char[][] grid, int i, int j) {
+        if (grid[i][j] == 'l') {
+            return 4;
+        } else if (grid[i][j] == 'o') {
+            return 3;
+        } else if (grid[i][j] == 'v') {
+            return 2;
+        } else if (grid[i][j] == 'e') {
+            return 1;
+        } else {
+            return 0;
         }
-        return sum;
     }
 }

@@ -1,4 +1,4 @@
-class Solution122 {
+class s122 {
     public int maxProfit(int[] prices) {
         int n=prices.length;
         int dp[][]=new int[n][2];

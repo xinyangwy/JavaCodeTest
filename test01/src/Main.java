@@ -1,53 +1,26 @@
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
+// 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+//        //偶数  前n/2个     162534
+//        //奇数数  前n/2个   15243
+//        int []numsPre=new int[n/2+1];
+//        if(n/2==0) {
+//
+//        }
+//        int []numsPost=new int[n/2+1];
+//        int []nums=new int[n+1];
 
-    }
 
-    class Solution {
-        public static int [][]dirs=new int[][]{{0,-1},{0,1},{-1,0},{1,0}};
-        public int orangesRotting(int[][] grid) {
-            int  m=grid.length;
-            int  n=grid[0].length;
-            int cnt=0;
-            Queue<int[]> q=new LinkedList<>();
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    if(grid[i][j]==1){
-                        cnt++;
-                    } else if (grid[i][j] == 2) {
-                        q.add(new int[]{i,j});
-                    }
-                }
-            }
-
-            int minutes=0;
-            while (cnt>0 && !q.isEmpty()){
-                minutes++;
-                //层序遍历 把新鲜的变为腐烂的
-                int s=q.size();
-                for (int k = 0; k < s; k++) {
-                    int []orange=q.poll();
-                    int i=orange[0];
-                    int j=orange[1];
-                    for (int[] dir : dirs) {
-                        int x=i+dir[0];
-                        int y=j+dir[1];
-                        if(x>=0 && x<m && y>=0 &&y<n && grid[x][y]==1){
-                            grid[x][y]=2;
-                            cnt--;
-                            q.add(new int[]{x,y});
-                        }
-                    }
-                }
-            }
-            return cnt>0?-1:minutes;
+        for (int i = 1; i <= n / 2; i++) {
+            System.out.print(i + " ");
+            System.out.print((n - i + 1) + " ");
+        }
+        if (n%2 == 1){
+            System.out.print(n/2+1);
         }
     }
 }
-
-
